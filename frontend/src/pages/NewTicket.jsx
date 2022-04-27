@@ -21,30 +21,31 @@ function NewTicket() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(isError) {
+    if (isError) {
       toast.error(message);
     }
 
-    if(isSuccess) {
+    if (isSuccess) {
       dispatch(reset());
-      navigate('/tickets');
+      navigate("/tickets");
     }
 
-    dispatch(reset())
+    dispatch(reset());
   }, [dispatch, isError, isSuccess, navigate, message]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTicket({product, description}));
+    console.log(product);
+    dispatch(createTicket({ product, description }));
   };
 
   if (isLoading) {
     return <Spinner />;
-  };
+  }
 
   return (
     <>
-      <BackButton url='/' />
+      <BackButton url="/" />
       <section className="heading">
         <h1>Create New Ticket</h1>
         <p>Please fill out form below</p>
@@ -63,7 +64,7 @@ function NewTicket() {
 
         <form onSubmit={onSubmit}>
           <div className="form-group">
-            <label htmlFor="product"></label>
+            <label htmlFor="product">Product</label>
             <select
               name="product"
               id="product"
@@ -71,7 +72,7 @@ function NewTicket() {
               onChange={(e) => setProduct(e.target.value)}
             >
               <option value="iPhone">iPhone</option>
-              <option value="MacBook Pro">MacBook Pro</option>
+              <option value="Macbook Pro">Macbook Pro</option>
               <option value="iMac">iMac</option>
               <option value="iPad">iPad</option>
             </select>
